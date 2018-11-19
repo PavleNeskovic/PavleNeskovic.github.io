@@ -1,55 +1,126 @@
-<h1>Making my first Unity game</h1>
-<h2>2.5D GAME</h2>
-<h3>Setting up a Scene</h3>
-<p>For this scene we need character that we control and floor where our character can walk on. That is it. Let's start with that.</p>
-<h4>Floor</h4>
-<p>To create a floor, where our character will stand on, we have to create a cube.&nbsp;<strong>GameObjects &gt; 3D Objects &gt; Cube.&nbsp;</strong>Set Position of X,Y,Z axis to 0. Scale X and Z to 100. Here's your floor.</p>
-<p>*floor_inspector*</p>
-<h4>FPS Character</h4>
-<p>We need the character to walk on the floor. Let's import it.&nbsp;<strong>Assets &gt; Import Package &gt; Characters.&nbsp;</strong>Select all assets and click&nbsp;on import.</p>
-<p>*fps_character_assets*</p>
-<p>In the project tab, from&nbsp;<strong>Standard Assets &gt; Characters &gt; FirstPersonCharacter &gt; Prefabs&nbsp;</strong>folder, drag out FPSController object to the scene. Now that FirstPersonCharacter has camera, we can remove the MainCamera from the scene.</p>
-<p>&nbsp;</p>
-<div>Test time: Run the game, your character should be able to move on the floor that we created using WASD keys.</div>
-<div>Note: If your character is falling trough the floor, set position of Y axis to be above 0, and check if Box Collider is enabled on Cube Object.</div>
-<div>*scene_with_fps_controller*</div>
-<div>&nbsp;</div>
-<h3>Creating an NPC</h3>
-<p>In this world, NPCs are going to be very simple. Only objective they have is to stand still and look at you. We are going to create our first npm with&nbsp;<a href="https://www.piskelapp.com/">PISKELAPP</a>.&nbsp;</p>
-<h4>Drawing an NPC</h4>
-<p>First we have to expand our canvas to have little more room for drawing:</p>
-<p>*piskel_expand_canvas*</p>
-<p>Now let's draw. We can animate the drawing by adding a new frame. For example, let's make our character blink from time to time.</p>
-<p>*piskel_character*</p>
-<p>When we are done, we should export the animation. Make sure that the animation is scaled up (to 1600px by 1600px for example), we don't want our animation to be blurry:</p>
-<p>*piskel_export*</p>
-<p>Drag the downloaded .png to the Project tab.</p>
-<h4>Creating the sprite from the image</h4>
-<p>Select downloaded image from the Project tab. From the settings, for Texture Type select Sprite (2D and UI). For Sprite Mode select Multiple. Then click on Sprite Editor button. If prompted, click on apply to create sprite.</p>
-<p>*create_sprite_setup*</p>
-<p>Now the Sprite editor is opened. Follow the instructions from the GIF bellow to slice the downloaded image:</p>
-<p>*sprite_editor*</p>
-<h4>Creating Sprite Game Object</h4>
-<p>We need this sprite in the game world.&nbsp;<strong>GameObject &gt; 2D Object &gt; Sprite.&nbsp;</strong>There it is. We want to animate this empty object with our sprite.&nbsp;<strong>Windows &gt; Animation&nbsp;</strong>will help, just make sure that New Sprite is selected in the Hierarchy tab. In Animation window/tab, click on Create button. Save the file with any name.&nbsp;</p>
-<p>Now, from the project tab, find your npc, it should have subcategories with every frame. Drag those frames into the animation, like this.</p>
-<p>&nbsp;*creating_animation*</p>
-<p>You can arrange frames any way you want.</p>
-<p>*arrange_frames*</p>
-<p>And there it is. Living and blinking.</p>
-<p>&nbsp;</p>
-<div>Test time: Run the game. You should see your creature somewhere. Note: If you dislike it's position, orientation or size, select New Sprite from the Hierarchy tab and in Inspection tab play with Position, Rotation and Scale properties, or simply drag the object anywhere you want</div>
-<div>&nbsp;</div>
-<div>*testing_with_npc*</div>
-<div>&nbsp;</div>
-<h3>Make NPC look at us</h3>
-<p>Looking good. One more thing that we want to do. We said that we want our npc to look at us. We need a script to do that. If you don't want to do any coding, no worries, we just need to do a simple Copy/Paste action.</p>
-<p>TL;DR Create the script named&nbsp;<code>CameraFacingBillboard</code>&nbsp;&gt; paste the code below and apply it to the NPC.</p>
-<p>To create a script, right click anywhere on Project tab.&nbsp;<strong>Create &gt; C# Script.&nbsp;</strong>Name that script&nbsp;<code>CameraFacingBillboard</code> (make sure you type that right, no spaces). Now, to edit the content of that script, we need to open it. right click on script file, than Open, or find the file in the project structure and open it in the notepad. Eather way, remove all contents from the file and paste the following:</p>
-<p>*<code>CameraFacingBillboard*</code></p>
-<p>Save the file. Drag&nbsp;<code>CameraFacingBillboard</code>&nbsp;file to the New Sprite object in the Hierarchy tab.</p>
-<p>*add_script*</p>
-<p>Done. Hope that wasn't too complicated.</p>
-<p>Test Time: Run the game. Let's go around the NPC. It is looking at us anywhere we go. Great job!</p>
-<p>*final test*</p>
-<p>That was it. Did you liked it? If so, consider buying me a icecream :)</p>
-<p>Thank you and have a nice day.</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Unity 2.5D - Creating 2D Characters in 3D environment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>Unity - Creating 2D Characters in 3D environment</h1>
+        <h2>2.5D GAME</h2>
+    </div>
+
+    <div class="container">
+        <h3>Setting up a Scene</h3>
+        <p>For this scene we need character that we control and floor where our character can walk on. That is it. Let's start
+            with that.</p>
+        <h4>Floor</h4>
+        <p>To create a floor, where our character will stand on, we have to create a cube.&nbsp;
+            <strong>GameObjects &gt; 3D Objects &gt; Cube.&nbsp;</strong>Set Position of X,Y,Z axis to 0. Scale X and Z to 100. Here's
+            your floor.</p>
+        <a href="https://imgur.com/502NOmd">
+            <img src="https://i.imgur.com/502NOmd.png" title="source: imgur.com" />
+        </a>
+        <h4>FPS Character</h4>
+        <p>We need the character to walk on the floor. Let's import it.&nbsp;
+            <strong>Assets &gt; Import Package &gt; Characters.&nbsp;</strong>Select all assets and click&nbsp;on import.</p>
+        <a href="https://imgur.com/53Ej9LV">
+            <img src="https://i.imgur.com/53Ej9LV.png" title="source: imgur.com" />
+        </a>
+        <p>In the project tab, from&nbsp;
+            <strong>Standard Assets &gt; Characters &gt; FirstPersonCharacter &gt; Prefabs&nbsp;</strong>folder, drag out FPSController
+            object to the scene. Now that FirstPersonCharacter has camera, we can remove the MainCamera from the scene.</p>
+        <p>&nbsp;</p>
+        <div>Test time: Run the game, your character should be able to move on the floor that we created using WASD keys.</div>
+        <div>Note: If your character is falling trough the floor, set position of Y axis to be above 0, and check if Box Collider
+            is enabled on Cube Object.</div>
+        <a href="https://imgur.com/XM1tiu0">
+            <img src="https://i.imgur.com/XM1tiu0.gif" title="source: imgur.com" />
+        </a>
+        <div>&nbsp;</div>
+        <h3>Creating an NPC</h3>
+        <p>In this world, NPCs are going to be very simple. Only objective they have is to stand still and look at you. We are
+            going to create our first npm with&nbsp;
+            <a href="https://www.piskelapp.com/">PISKELAPP</a>.&nbsp;</p>
+        <h4>Drawing an NPC</h4>
+        <p>First we have to expand our canvas to have little more room for drawing:</p>
+        <a href="https://imgur.com/nOWdh1Y">
+            <img src="https://i.imgur.com/nOWdh1Y.gif" title="source: imgur.com" />
+        </a>
+        <p>Now let's draw. We can animate the drawing by adding a new frame. For example, let's make our character blink from
+            time to time.</p>
+        <a href="https://imgur.com/J9SHQVa">
+            <img src="https://i.imgur.com/J9SHQVa.png" title="source: imgur.com" />
+        </a>
+        <p>When we are done, we should export the animation. Make sure that the animation is scaled up (to 1600px by 1600px
+            for example), we don't want our animation to be blurry:</p>
+        <a href="https://imgur.com/q7hHNw6">
+            <img src="https://i.imgur.com/q7hHNw6.gif" title="source: imgur.com" />
+        </a>
+        <p>Drag the downloaded .png to the Project tab.</p>
+        <h4>Creating the sprite from the image</h4>
+        <p>Select downloaded image from the Project tab. From the settings, for Texture Type select Sprite (2D and UI). For
+            Sprite Mode select Multiple. Then click on Sprite Editor button. If prompted, click on apply to create sprite.</p>
+        <a href="https://imgur.com/4QQzUZu">
+            <img src="https://i.imgur.com/4QQzUZu.png" title="source: imgur.com" />
+        </a>
+        <p>Now the Sprite editor is opened. Follow the instructions from the GIF bellow to slice the downloaded image:</p>
+        <a href="https://imgur.com/Qiv1cDi">
+            <img src="https://i.imgur.com/Qiv1cDi.gif" title="source: imgur.com" />
+        </a>
+        <h4>Creating Sprite Game Object</h4>
+        <p>We need this sprite in the game world.&nbsp;
+            <strong>GameObject &gt; 2D Object &gt; Sprite.&nbsp;</strong>There it is. We want to animate this empty object with our
+            sprite.&nbsp;
+            <strong>Windows &gt; Animation&nbsp;</strong>will help, just make sure that New Sprite is selected in the Hierarchy tab.
+            In Animation window/tab, click on Create button. Save the file with any name.&nbsp;</p>
+        <p>Now, from the project tab, find your npc, it should have subcategories with every frame. Drag those frames into the
+            animation, like this.</p>
+        <a href="https://imgur.com/eHiRp5r">
+            <img src="https://i.imgur.com/eHiRp5r.gif" title="source: imgur.com" />
+        </a>
+        <p>You can arrange frames any way you want.</p>
+        <a href="https://imgur.com/1zWszAn">
+            <img src="https://i.imgur.com/1zWszAn.png" title="source: imgur.com" />
+        </a>
+        <p>And there it is. Living and blinking.</p>
+        <p>&nbsp;</p>
+        <div>Test time: Run the game. You should see your creature somewhere. Note: If you dislike it's position, orientation
+            or size, select New Sprite from the Hierarchy tab and in Inspection tab play with Position, Rotation and Scale
+            properties, or simply drag the object anywhere you want</div>
+        <a href="https://imgur.com/ahqusxU">
+            <img src="https://i.imgur.com/ahqusxU.gif" title="source: imgur.com" />
+        </a>
+        <h3>Make NPC look at us</h3>
+        <p>Looking good. One more thing that we want to do. We said that we want our npc to look at us. We need a script to
+            do that. If you don't want to do any coding, no worries, we just need to do a simple Copy/Paste action.</p>
+        <p>TL;DR Create the script named&nbsp;
+            <code>CameraFacingBillboard</code>&nbsp;&gt; paste the code below and apply it to the NPC.</p>
+        <p>To create a script, right click anywhere on Project tab.&nbsp;
+            <strong>Create &gt; C# Script.&nbsp;</strong>Name that script&nbsp;
+            <code>CameraFacingBillboard</code> (make sure you type that right, no spaces). Now, to edit the content of that script, we need to open it. right
+            click on script file, than Open, or find the file in the project structure and open it in the notepad. Eather
+            way, remove all contents from the file and paste the following:</p>
+        <script src="https://gist.github.com/PavleNeskovic/77e27c6247a71cb071c6e3e1bd0ce62a.js"></script>
+        <p>Save the file. Drag&nbsp;
+            <code>CameraFacingBillboard</code>&nbsp;file to the New Sprite object in the Hierarchy tab.</p>
+        <a href="https://imgur.com/2XoPpzi">
+            <img src="https://i.imgur.com/2XoPpzi.gif" title="source: imgur.com" />
+        </a>
+        <p>Done. Hope that wasn't too complicated.</p>
+        <p>Test Time: Run the game. Let's go around the NPC. It is looking at us anywhere we go. Great job!</p>
+        <a href="https://imgur.com/YtPujFJ">
+            <img src="https://i.imgur.com/YtPujFJ.gif" title="source: imgur.com" />
+        </a>
+        <p>That was it. Did you liked it? If so, consider buying me a icecream :)</p>
+        <p>Thank you and have a nice day.</p>
+    </div>
+</body>
+</html>
